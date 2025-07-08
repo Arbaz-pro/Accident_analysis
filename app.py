@@ -4,6 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 import os
+import plotly.graph_objects as go
 
 st.set_page_config(page_title="Excel Data Statistical Analyzer", layout="wide")
 if "page" not in st.session_state:

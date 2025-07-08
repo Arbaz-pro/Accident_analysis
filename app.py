@@ -60,11 +60,14 @@ elif st.session_state.page == "analyze":
         fig = go.Figure()
     
         for fy in pivot_df.columns:
+            y_vals = pivot_df[fy]
+            text_labels = [str(val) if val > 0 else "" for val in y_vals]  # ✅ hide zeros
+        
             fig.add_trace(go.Bar(
                 x=pivot_df.index,
-                y=pivot_df[fy],
+                y=y_vals,
                 name=str(fy),
-                text=pivot_df[fy],
+                text=text_labels,
                 textposition='outside',
             ))
     

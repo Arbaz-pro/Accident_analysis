@@ -49,3 +49,24 @@ elif st.session_state.page == "analyze":
     tab1,tab2,=st.tabs(["Data","Chart"])
     with tab1:
             st.dataframe(fil_df)
+    with tab2:
+        st.subheader("State Wise Distribution for Packed TT's")
+
+        # Group data by SO and FY
+        grouped = fil_df.groupby(["SO", "FY"]).size().reset_index(name="Count")
+
+        # Pivot to get FYs as columns
+        pivot_df = grouped.pivot(index="SO", columns="FY", values="Count").fillna(0)
+
+        # Plotly grouped bar chart
+        fig = px.bar(
+            pivot_df,
+            x=pivot_df.index,
+            y=pivot_df.columns,
+            barmode='group',
+            labels={"value": "Count", "SO": "State Office"},
+            title="State Wise Distribution for Packed TT's",
+            height=500,
+        )
+        fig.update_layout(xaxis_title="SO", yaxis_title="Count", legend_title="Financial Year")
+        st.plotly_chart(fig, use_container_width=True)

@@ -67,7 +67,7 @@ elif st.session_state.page == "analyze":
             text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
         
             fig.add_trace(go.Bar(
-                x=pivot_df.index,
+                x=pivot_df,
                 y=y_vals,
                 name=str(fy),
                 text=text_labels,

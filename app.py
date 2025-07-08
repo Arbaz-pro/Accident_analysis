@@ -61,7 +61,7 @@ elif st.session_state.page == "analyze":
     
         for fy in pivot_df.columns:
             y_vals = pivot_df[fy]
-            text_labels = [str(val) if val > 0 else "" for val in y_vals]  # ✅ hide zeros
+            text_labels = text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
         
             fig.add_trace(go.Bar(
                 x=pivot_df.index,
@@ -79,5 +79,7 @@ elif st.session_state.page == "analyze":
             legend_title="Financial Year",
             height=550
         )
+
+        fig.update_traces(textfont=dict(size=14, color='black'))
     
         st.plotly_chart(fig, use_container_width=True)

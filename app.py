@@ -61,7 +61,7 @@ elif st.session_state.page == "analyze":
     
         for fy in pivot_df.columns:
             y_vals = pivot_df[fy]
-            text_labels = text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
+            text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
         
             fig.add_trace(go.Bar(
                 x=pivot_df.index,
@@ -69,17 +69,16 @@ elif st.session_state.page == "analyze":
                 name=str(fy),
                 text=text_labels,
                 textposition='outside',
+                textfont=dict(size=14, color='black')  # ✅ Proper label styling
             ))
     
-        fig.update_layout(
-            barmode='group',
-            title="State Wise Distribution for Packed TT's",
-            xaxis_title="State Office",
-            yaxis_title="Count",
-            legend_title="Financial Year",
-            height=550
-        )
-
-        fig.update_traces(textfont=dict(size=14, color='black'))
-    
+        fig.add_trace(go.Bar(
+        x=pivot_df.index,
+        y=y_vals,
+        name=str(fy),
+        text=text_labels,
+        textposition='outside',
+        textfont=dict(size=14, color='black')  # ✅ Font size and color here
+    ))
+ 
         st.plotly_chart(fig, use_container_width=True)

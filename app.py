@@ -55,7 +55,7 @@ elif st.session_state.page == "analyze":
 
         grouped = fil_df.groupby(["SO", "FY"]).size().reset_index(name="Count")
         pivot_df = grouped.pivot(index="SO", columns="FY", values="Count").fillna(0)
-    
+        st.write("ytest",pivot_df)
         # Create grouped bar chart with labels
         fig = go.Figure()
     

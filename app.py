@@ -39,4 +39,6 @@ elif st.session_state.page == "analyze":
     with col4:
         sel_tt = st.multiselect("TT_Type", sorted(df["Type of TT "].dropna().unique()))
     tab1,tab2,=st.tabs(["Data","Chart"])
-    
+    with tab1:
+        if sel_fy==[]:
+            st.dataframe(fil_df)

@@ -34,5 +34,6 @@ if st.session_state.page == "upload":
 elif st.session_state.page == "analyze":
     df = st.session_state.df
     fil_df=df.copy()
-    col1, col2, col3,col4 = st.columns(3)
-    
+    col1, col2, col3, col4, = st.columns(4)
+    with col1:
+        sel_fy = st.multiselect("Financial_Year", sorted(df["FY"].dropna().unique()))

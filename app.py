@@ -38,5 +38,5 @@ elif st.session_state.page == "analyze":
         sel_so = st.multiselect("State_Office", sorted(df["SO"].dropna().unique()))
     with col4:
         sel_tt = st.multiselect("TT_Type", sorted(df["Type of TT "].dropna().unique()))
-    tab1,tab2,=st.tab("Data","Chart")
+    tab1,tab2,=st.tabs("Data","Chart")
     

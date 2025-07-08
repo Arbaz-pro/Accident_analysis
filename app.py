@@ -22,12 +22,7 @@ if st.session_state.page == "upload":
         if file_ext == ".csv":
             df = pd.read_csv(uploaded_file, encoding='ISO-8859-1')
         else:
-            df = pd.read_excel(uploaded_file)
-        df.rename(columns={
-        "Day / Night": "TimeOfDay",
-        "Cause / Category": "Cause"
-    }, inplace=True)
-        
+            df = pd.read_excel(uploaded_file)       
         st.session_state.df = df
         st.session_state.page = "analyze"
         st.rerun()
@@ -37,3 +32,9 @@ elif st.session_state.page == "analyze":
     col1, col2, col3, col4, = st.columns(4)
     with col1:
         sel_fy = st.multiselect("Financial_Year", sorted(df["FY"].dropna().unique()))
+    with col2:
+        sel_td = st.multiselect("Time_Of_Day", sorted(df["Day / Night"].dropna().unique()))
+    with col3:
+        sel_so = st.multiselect("State_Office", sorted(df["SO"].dropna().unique()))
+    with col4:
+        sel_tt = st.multiselect("TT_Type", sorted(df["Type of TT "].dropna().unique()))

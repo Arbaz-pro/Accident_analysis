@@ -60,6 +60,8 @@ elif st.session_state.page == "analyze":
         fig = go.Figure()
     
         for fy in pivot_df.columns:
+            if sel_fy:
+                fy=1
             y_vals = pivot_df[fy]
             text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
         

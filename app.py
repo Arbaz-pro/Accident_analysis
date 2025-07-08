@@ -66,6 +66,7 @@ elif st.session_state.page == "analyze":
             barmode='group',
             labels={"value": "Count", "SO": "State Office"},
             title="State Wise Distribution for Packed TT's",
+            text=pivot_df[fy],
             height=500,
         )
         fig.update_layout(xaxis_title="SO", yaxis_title="Count", legend_title="Financial Year")

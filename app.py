@@ -43,7 +43,7 @@ elif st.session_state.page == "analyze":
         if sel_so:
             fil_df=fil_df[fil_df["SO"].isin(sel_so)]
     with col4:
-        sel_tt = st.multiselect("TT_Type", sorted(df["Type of TT "].dropna().unique()))
+        sel_tt = st.multiselect("TT_Type", sorted(df["Type of TT"].dropna().unique()))
         if sel_tt:
             fil_df=fil_df[fil_df["Type of TT"].isin(sel_tt)]
     tab1,tab2,=st.tabs(["Data","Chart"])

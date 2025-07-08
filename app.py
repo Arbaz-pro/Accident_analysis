@@ -61,7 +61,7 @@ elif st.session_state.page == "analyze":
     
         for fy in pivot_df.columns:
             if sel_fy:
-                str.write("test",fy)
+                st.write("test",fy)
             y_vals = pivot_df[fy]
             text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
         

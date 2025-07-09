@@ -51,6 +51,10 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
+
+        co1, co2, co3, co4, = st.columns(4)
+        with c1:
+            if st.button("State Wise Distribution")
         st.subheader("State Wise Distribution")
 
         grouped = (

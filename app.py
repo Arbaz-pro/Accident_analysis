@@ -68,7 +68,7 @@ elif st.session_state.page == "analyze":
         text_auto=True,
         color_discrete_sequence=color_palette
         )
-        bar_fig.update_layout(xaxis_tickangle=-45,barmode="stack")
+        bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
         st.plotly_chart(bar_fig, use_container_width=True)
         
         st.subheader("Month Wise Distribution")

@@ -181,7 +181,7 @@ elif st.session_state.page == "analyze":
             cause_counts.columns = ["Cause", "Count"]
             
             # Optional: Show top 10 causes only
-            top_n = 10
+            top_n = 7
             cause_counts = cause_counts.head(top_n)
             
             # Create pie chart

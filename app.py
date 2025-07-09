@@ -99,7 +99,7 @@ elif st.session_state.page == "analyze":
         for i, fy in enumerate(selected_years):
             df_fy = grouped[grouped["FY"] == fy]
             # Build label: "FY\nCount"
-            text_labels = [f"{fy}\n{int(val)}" if val > 0 else "" for val in df_fy["Total Accidents"]]
+            text_labels = [f"{fy}\n":- "{int(val)}" if val > 0 else "" for val in df_fy["Total Accidents"]]
             
             fig.add_trace(go.Bar(
                 x=df_fy["Month"],

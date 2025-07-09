@@ -110,13 +110,13 @@ elif st.session_state.page == "analyze":
                 marker_color=color_palette[i % len(color_palette)],
                 textfont=dict(size=12, color="white"),
             ))
-        bar_fig.update_layout(
+        fig.update_layout(
         xaxis_tickangle=-45,
         barmode="stack",
         xaxis_title="Month",
         yaxis_title="Total Accidents",
         legend_title="Financial Year"
     )
-        st.plotly_chart(bar_fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
             

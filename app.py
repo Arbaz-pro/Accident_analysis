@@ -77,6 +77,12 @@ elif st.session_state.page == "analyze":
         .size()
         .reset_index(name="Total Accidents")
         )
+        month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+        # Ensure 'Month' is a categorical type with specified order
+        grouped["Month"] = pd.Categorical(grouped["Month"], categories=month_order, ordered=True)
+        
+        # Sort the DataFrame accordingly
+        grouped = grouped.sort_values("Month")
         color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
         bar_fig = px.bar(
         grouped,

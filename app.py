@@ -103,7 +103,13 @@ elif st.session_state.page == "analyze":
         text_auto=True,
         color_discrete_sequence=color_palette
         )
-        bar_fig.update_layout(xaxis_tickangle=-45,barmode="stack")
+        bar_fig.update_layout(
+        xaxis_tickangle=-45,
+        barmode="stack",
+        xaxis_title="Month",
+        yaxis_title="Total Accidents",
+        legend_title="Financial Year"
+    )
         st.plotly_chart(bar_fig, use_container_width=True)
 
         st.write("Terst",full_index)

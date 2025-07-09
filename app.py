@@ -89,3 +89,6 @@ elif st.session_state.page == "analyze":
         )
         bar_fig.update_layout(xaxis_tickangle=-45,barmode="stack")
         st.plotly_chart(bar_fig, use_container_width=True)
+
+        
+        

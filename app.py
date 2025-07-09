@@ -30,6 +30,7 @@ if st.session_state.page == "upload":
 elif st.session_state.page == "analyze":
     df = st.session_state.df
     fil_df=df.copy()
+    fil_df["FY_short"] = fil_df["FY"].str[-5:]
     col1, col2, col3, col4, = st.columns(4)
     with col1:
         sel_fy = st.multiselect("Financial_Year", sorted(df["FY"].dropna().unique()))
@@ -57,7 +58,7 @@ elif st.session_state.page == "analyze":
             "DSO", "PSO", "RSO", "UPSO-I", "UPSO-II", "WBSO", "OSO",
             "BSO", "GSO", "MSO", "MPSO", "TNSO", "KESO", "KASO", "TAPSO", "IOAOD"
         ]
-            selected_years = fil_df["FY"].unique()
+            selected_years = fil_df["FY_short"].unique()
             selected_so = so_order
             
             # Create full combination of FY and Month
@@ -66,7 +67,7 @@ elif st.session_state.page == "analyze":
                 names=["SO", "FY"]
             )
             grouped = (
-            fil_df.groupby(["SO", "FY"])
+            fil_df.groupby(["SO", "FY_short"])
             .size()
             .reindex(full_index, fill_value=0)
             .reset_index(name="Total Accidents")

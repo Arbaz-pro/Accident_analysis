@@ -117,7 +117,7 @@ elif st.session_state.page == "analyze":
         text=[f"{int(val)}" if val > 0 else "" for val in monthly_totals.values],
         textposition="top center",
         showlegend=False,
-        textfont=dict(size=14, color="black", family="Arial"),
+        textfont=dict(size=14, color="black", family="Arial",family="Arial Black"),
     ))
         fig.update_layout(
         height=700,         # Increase height (default is ~450)

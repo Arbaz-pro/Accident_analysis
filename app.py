@@ -51,10 +51,9 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
-
-        co1, co2, co3, co4, = st.columns(4)
-        
-        if st.button("State Wise Distribution"):
+        chart=["State Wise Distribution",Month Wise Distribution]
+        sel_ch = st.multiselect("Type of Chart",chart)
+        if(sel_ch=="State Wise Distribution"):
             st.write("test","test")
             st.subheader("State Wise Distribution")
 
@@ -76,7 +75,7 @@ elif st.session_state.page == "analyze":
             bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
             st.plotly_chart(bar_fig, use_container_width=True)
 
-        if st.button("Month Wise Distribution"):
+        if(sel_ch=="Month Wise Distribution"):
             st.write("test","test2") 
             st.subheader("Month Wise Distribution")
             month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]

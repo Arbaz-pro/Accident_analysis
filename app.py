@@ -75,66 +75,66 @@ elif st.session_state.page == "analyze":
             )
             bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
             st.plotly_chart(bar_fig, use_container_width=True)
-        with co2:
-            if st.button("Month Wise Distribution"):
-                st.write("test","test2") 
-                st.subheader("Month Wise Distribution")
-                month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
-                selected_years = fil_df["FY"].unique()
-                selected_months = month_order
-                
-                # Create full combination of FY and Month
-                full_index = pd.MultiIndex.from_product(
-                    [selected_months, selected_years],
-                    names=["Month", "FY"]
-                )
-                grouped = (
-                fil_df.groupby(["Month", "FY"])
-                .size()
-                .reindex(full_index, fill_value=0)
-                .reset_index(name="Total Accidents")
-                )
-                
-                # Ensure 'Month' is a categorical type with specified order
-                grouped["Month"] = pd.Categorical(grouped["Month"], categories=month_order, ordered=True)
-                
-                # Sort the DataFrame accordingly
-                grouped = grouped.sort_values("Month")
-                color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
-                fig = go.Figure()
-                monthly_totals = grouped.groupby("Month")["Total Accidents"].sum().reindex(month_order)
-                for i, fy in enumerate(selected_years):
-                    df_fy = grouped[grouped["FY"] == fy]
-                    # Build label: "FY\nCount"
-                    text_labels = [f"{fy} :- ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
-                    
-                    fig.add_trace(go.Bar(
-                        x=df_fy["Month"],
-                        y=df_fy["Total Accidents"],
-                        name=fy,
-                        text=text_labels,
-                        textposition="inside",
-                        marker_color=color_palette[i % len(color_palette)],
-                        textfont=dict(size=12, color="white",family="Arial Black"),
-                    ))
-                fig.add_trace(go.Scatter(
-                x=monthly_totals.index,
-                y=monthly_totals.values,
-                mode="text",
-                text=[f"{int(val)}" if val > 0 else "" for val in monthly_totals.values],
-                textposition="top center",
-                showlegend=False,
-                textfont=dict(size=14, color="black",family="Arial Black"),
-            ))
-                fig.update_layout(
-                height=700,         # Increase height (default is ~450)
-                width=1400,  
-                xaxis_tickangle=-45,
-                barmode="stack",
-                xaxis_title="Month",
-                yaxis_title="Total Accidents",
-                legend_title="Financial Year"
+
+        if st.button("Month Wise Distribution"):
+            st.write("test","test2") 
+            st.subheader("Month Wise Distribution")
+            month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+            selected_years = fil_df["FY"].unique()
+            selected_months = month_order
+            
+            # Create full combination of FY and Month
+            full_index = pd.MultiIndex.from_product(
+                [selected_months, selected_years],
+                names=["Month", "FY"]
             )
-                st.plotly_chart(fig, use_container_width=True)
+            grouped = (
+            fil_df.groupby(["Month", "FY"])
+            .size()
+            .reindex(full_index, fill_value=0)
+            .reset_index(name="Total Accidents")
+            )
+            
+            # Ensure 'Month' is a categorical type with specified order
+            grouped["Month"] = pd.Categorical(grouped["Month"], categories=month_order, ordered=True)
+            
+            # Sort the DataFrame accordingly
+            grouped = grouped.sort_values("Month")
+            color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
+            fig = go.Figure()
+            monthly_totals = grouped.groupby("Month")["Total Accidents"].sum().reindex(month_order)
+            for i, fy in enumerate(selected_years):
+                df_fy = grouped[grouped["FY"] == fy]
+                # Build label: "FY\nCount"
+                text_labels = [f"{fy} :- ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
+                
+                fig.add_trace(go.Bar(
+                    x=df_fy["Month"],
+                    y=df_fy["Total Accidents"],
+                    name=fy,
+                    text=text_labels,
+                    textposition="inside",
+                    marker_color=color_palette[i % len(color_palette)],
+                    textfont=dict(size=12, color="white",family="Arial Black"),
+                ))
+            fig.add_trace(go.Scatter(
+            x=monthly_totals.index,
+            y=monthly_totals.values,
+            mode="text",
+            text=[f"{int(val)}" if val > 0 else "" for val in monthly_totals.values],
+            textposition="top center",
+            showlegend=False,
+            textfont=dict(size=14, color="black",family="Arial Black"),
+        ))
+            fig.update_layout(
+            height=700,         # Increase height (default is ~450)
+            width=1400,  
+            xaxis_tickangle=-45,
+            barmode="stack",
+            xaxis_title="Month",
+            yaxis_title="Total Accidents",
+            legend_title="Financial Year"
+        )
+            st.plotly_chart(fig, use_container_width=True)
 
             

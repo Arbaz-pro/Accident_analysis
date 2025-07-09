@@ -112,7 +112,4 @@ elif st.session_state.page == "analyze":
     )
         st.plotly_chart(bar_fig, use_container_width=True)
 
-        st.write("Terst",full_index)
-
-        
-        
+            

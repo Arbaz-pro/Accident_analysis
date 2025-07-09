@@ -53,26 +53,66 @@ elif st.session_state.page == "analyze":
     with tab2:
         sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution"])
         if(sel_ch=="State Wise Distribution"):
-            st.write("test","test")
-            st.subheader("State Wise Distribution")
-
+            so_order = [
+            "DSO", "PSO", "RSO", "UPSO-I", "UPSO-II", "WBSO", "OSO",
+            "BSO", "GSO", "MSO", "MPSO", "TNSO", "KESO", "KASO", "TAPSO", "IOAOD"
+        ]]
+            selected_years = fil_df["FY"].unique()
+            selected_so = so_order
+            
+            # Create full combination of FY and Month
+            full_index = pd.MultiIndex.from_product(
+                [selected_so, selected_years],
+                names=["SO", "FY"]
+            )
             grouped = (
             fil_df.groupby(["SO", "FY"])
             .size()
+            .reindex(full_index, fill_value=0)
             .reset_index(name="Total Accidents")
             )
+            
+            # Ensure 'SO' is a categorical type with specified order
+            grouped["SO"] = pd.Categorical(grouped["SO"], categories=so_order, ordered=True)
+            
+            # Sort the DataFrame accordingly
+            grouped = grouped.sort_values("Month")
             color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
-            bar_fig = px.bar(
-            grouped,
-            x="SO",
-            y="Total Accidents",
-            color="FY",
-            title="Total Accident distribution",
-            text_auto=True,
-            color_discrete_sequence=color_palette
-            )
-            bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
-            st.plotly_chart(bar_fig, use_container_width=True)
+            fig = go.Figure()
+            so_totals = grouped.groupby("SO")["Total Accidents"].sum().reindex(so_order)
+            for i, fy in enumerate(selected_years):
+                df_fy = grouped[grouped["FY"] == fy]
+                # Build label: "FY\nCount"
+                text_labels = [f"{fy} :- ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
+                
+                fig.add_trace(go.Bar(
+                    x=df_fy["SO"],
+                    y=df_fy["Total Accidents"],
+                    name=fy,
+                    text=text_labels,
+                    textposition="inside",
+                    marker_color=color_palette[i % len(color_palette)],
+                    textfont=dict(size=12, color="white",family="Arial Black"),
+                ))
+            fig.add_trace(go.Scatter(
+            x=so_totals.index,
+            y=so_totals.values,
+            mode="text",
+            text=[f"{int(val)}" if val > 0 else "" for val in so_totals.values],
+            textposition="top center",
+            showlegend=False,
+            textfont=dict(size=14, color="black",family="Arial Black"),
+        ))
+            fig.update_layout(
+            height=700,         # Increase height (default is ~450)
+            width=1400,  
+            xaxis_tickangle=-45,
+            barmode="stack",
+            xaxis_title="SO",
+            yaxis_title="Total Accidents",
+            legend_title="Financial Year"
+        )
+            st.plotly_chart(fig, use_container_width=True)
 
         elif(sel_ch=="Month Wise Distribution"):
             st.write("test","test2") 

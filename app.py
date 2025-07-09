@@ -56,7 +56,7 @@ elif st.session_state.page == "analyze":
             so_order = [
             "DSO", "PSO", "RSO", "UPSO-I", "UPSO-II", "WBSO", "OSO",
             "BSO", "GSO", "MSO", "MPSO", "TNSO", "KESO", "KASO", "TAPSO", "IOAOD"
-        ]]
+        ]
             selected_years = fil_df["FY"].unique()
             selected_so = so_order
             
@@ -76,7 +76,7 @@ elif st.session_state.page == "analyze":
             grouped["SO"] = pd.Categorical(grouped["SO"], categories=so_order, ordered=True)
             
             # Sort the DataFrame accordingly
-            grouped = grouped.sort_values("Month")
+            grouped = grouped.sort_values("SO")
             color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
             fig = go.Figure()
             so_totals = grouped.groupby("SO")["Total Accidents"].sum().reindex(so_order)

@@ -198,5 +198,8 @@ elif st.session_state.page == "analyze":
             textfont_size=14,
             marker=dict(line=dict(color="#000000", width=1))
             )
+            fig.update_layout(
+            height=700,         # Increase height (default is ~450)
+            width=1400, )
 
             st.plotly_chart(fig, use_container_width=True)

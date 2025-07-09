@@ -56,6 +56,9 @@ elif st.session_state.page == "analyze":
         with co1:
             if st.button("State Wise Distribution"):
                 st.write("test","test")
+        with co2:
+            if st.button("Month Wise Distribution"):
+                st.write("test","test2")
         st.subheader("State Wise Distribution")
 
         grouped = (

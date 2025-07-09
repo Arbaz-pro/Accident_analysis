@@ -108,7 +108,7 @@ elif st.session_state.page == "analyze":
                 text=text_labels,
                 textposition="inside",
                 marker_color=color_palette[i % len(color_palette)],
-                textfont=dict(size=12, color="green",family="Arial Black"),
+                textfont=dict(size=12, color="yellow",family="Arial Black"),
             ))
         fig.add_trace(go.Scatter(
         x=monthly_totals.index,

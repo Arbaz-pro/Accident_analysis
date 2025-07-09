@@ -53,35 +53,20 @@ elif st.session_state.page == "analyze":
     with tab2:
         st.subheader("State Wise Distribution for Packed TT's")
 
-        grouped = fil_df.groupby(["SO", "FY"]).size().reset_index(name="Count")
-        pivot_df = grouped.pivot(index="SO", columns="FY", values="Count").fillna(0)
-        st.write("ytest",pivot_df)
-        # Create grouped bar chart with labels
-        fig = go.Figure()
-    
-        for fy in pivot_df.columns:
-            if sel_fy:
-                st.write("test",fy)
-            y_vals = pivot_df[fy]
-            st.write("test",y_vals)
-            text_labels = [str(int(val)) if val > 0 else "" for val in y_vals]
-        
-            fig.add_trace(go.Bar(
-                x=pivot_df,
-                y=y_vals,
-                name=str(fy),
-                text=text_labels,
-                textposition='outside',
-                textfont=dict(size=14, color='black')  # ✅ Proper label styling
-            ))
-    
-        fig.add_trace(go.Bar(
-        x=pivot_df.index,
-        y=y_vals,
-        name=str(fy),
-        text=text_labels,
-        textposition='outside',
-        textfont=dict(size=14, color='black')  # ✅ Font size and color here
-    ))
- 
-        st.plotly_chart(fig, use_container_width=True)
+        grouped = (
+                fil_df.groupby(["SO", "FY"])
+                .size()
+                .reset_index(name="Total Accidents")
+                )
+        color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
+        bar_fig = px.bar(
+        grouped,
+        x="State Office",
+        y="Total Accidents",
+        color="Financial Year",
+        title="Total Accident distribution",
+        text_auto=True,
+        color_discrete_sequence=color_palette
+        )
+        bar_fig.update_layout(xaxis_tickangle=-45,barmode="stack")
+        st.plotly_chart(bar_fig, use_container_width=True)

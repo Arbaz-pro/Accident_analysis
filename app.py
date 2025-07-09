@@ -114,7 +114,7 @@ elif st.session_state.page == "analyze":
         x=monthly_totals.index,
         y=monthly_totals.values,
         mode="text",
-        text=[f"Total: {int(val)}" if val > 0 else "" for val in monthly_totals.values],
+        text=[f"{int(val)}" if val > 0 else "" for val in monthly_totals.values],
         textposition="top center",
         showlegend=False,
         textfont=dict(size=14, color="black", family="Arial"),

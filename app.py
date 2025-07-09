@@ -51,8 +51,7 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
-        chart=["State Wise Distribution","Month Wise Distribution"]
-        sel_ch = st.multiselect("Type of Chart",chart)
+        sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution"])
         if(sel_ch=="State Wise Distribution"):
             st.write("test","test")
             st.subheader("State Wise Distribution")

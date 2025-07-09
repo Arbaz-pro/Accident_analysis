@@ -75,7 +75,7 @@ elif st.session_state.page == "analyze":
             bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
             st.plotly_chart(bar_fig, use_container_width=True)
 
-        if(sel_ch=="Month Wise Distribution"):
+        elif(sel_ch=="Month Wise Distribution"):
             st.write("test","test2") 
             st.subheader("Month Wise Distribution")
             month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]

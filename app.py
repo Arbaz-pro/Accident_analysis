@@ -53,7 +53,7 @@ elif st.session_state.page == "analyze":
     with tab2:
 
         co1, co2, co3, co4, = st.columns(4)
-        with c1:
+        with co1:
             if st.button("State Wise Distribution"):
                 st.write("test","test")
         st.subheader("State Wise Distribution")

@@ -120,6 +120,8 @@ elif st.session_state.page == "analyze":
         textfont=dict(size=14, color="black", family="Arial"),
     ))
         fig.update_layout(
+        height=700,         # Increase height (default is ~450)
+        width=1400,  
         xaxis_tickangle=-45,
         barmode="stack",
         xaxis_title="Month",

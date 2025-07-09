@@ -107,6 +107,7 @@ elif st.session_state.page == "analyze":
                 name=fy,
                 text=text_labels,
                 textposition="inside",
+                textauto=True,
                 marker_color=color_palette[i % len(color_palette)],
                 textfont=dict(size=12, color="white"),
             ))

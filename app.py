@@ -53,28 +53,28 @@ elif st.session_state.page == "analyze":
     with tab2:
 
         co1, co2, co3, co4, = st.columns(4)
-        with co1:
-            if st.button("State Wise Distribution"):
-                st.write("test","test")
-                st.subheader("State Wise Distribution")
+        
+        if st.button("State Wise Distribution"):
+            st.write("test","test")
+            st.subheader("State Wise Distribution")
 
-                grouped = (
-                fil_df.groupby(["SO", "FY"])
-                .size()
-                .reset_index(name="Total Accidents")
-                )
-                color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
-                bar_fig = px.bar(
-                grouped,
-                x="SO",
-                y="Total Accidents",
-                color="FY",
-                title="Total Accident distribution",
-                text_auto=True,
-                color_discrete_sequence=color_palette
-                )
-                bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
-                st.plotly_chart(bar_fig, use_container_width=True)
+            grouped = (
+            fil_df.groupby(["SO", "FY"])
+            .size()
+            .reset_index(name="Total Accidents")
+            )
+            color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
+            bar_fig = px.bar(
+            grouped,
+            x="SO",
+            y="Total Accidents",
+            color="FY",
+            title="Total Accident distribution",
+            text_auto=True,
+            color_discrete_sequence=color_palette
+            )
+            bar_fig.update_layout( height=700,xaxis_tickangle=-45,barmode="stack")
+            st.plotly_chart(bar_fig, use_container_width=True)
         with co2:
             if st.button("Month Wise Distribution"):
                 st.write("test","test2") 

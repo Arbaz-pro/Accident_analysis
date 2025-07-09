@@ -51,7 +51,7 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
-        st.subheader("State Wise Distribution for Packed TT's")
+        st.subheader("State Wise Distribution")
 
         grouped = (
         fil_df.groupby(["SO", "FY"])
@@ -62,6 +62,25 @@ elif st.session_state.page == "analyze":
         bar_fig = px.bar(
         grouped,
         x="SO",
+        y="Total Accidents",
+        color="FY",
+        title="Total Accident distribution",
+        text_auto=True,
+        color_discrete_sequence=color_palette
+        )
+        bar_fig.update_layout(xaxis_tickangle=-45,barmode="stack")
+        st.plotly_chart(bar_fig, use_container_width=True)
+        
+        st.subheader("Month Wise Distribution")
+        grouped = (
+        fil_df.groupby(["Month", "FY"])
+        .size()
+        .reset_index(name="Total Accidents")
+        )
+        color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
+        bar_fig = px.bar(
+        grouped,
+        x="Month",
         y="Total Accidents",
         color="FY",
         title="Total Accident distribution",

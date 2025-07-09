@@ -52,7 +52,7 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
-        sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution"])
+        sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution","Majority Causes"])
         if(sel_ch=="State Wise Distribution"):
             so_order = [
             "DSO", "PSO", "RSO", "UPSO-I", "UPSO-II", "WBSO", "OSO",
@@ -176,4 +176,27 @@ elif st.session_state.page == "analyze":
         )
             st.plotly_chart(fig, use_container_width=True)
 
-            
+            elif(sel_ch=="Majority Causes"):
+                cause_counts = fil_df["Cause / Category"].value_counts().reset_index()
+                cause_counts.columns = ["Cause", "Count"]
+                
+                # Optional: Show top 10 causes only
+                top_n = 10
+                cause_counts = cause_counts.head(top_n)
+                
+                # Create pie chart
+                fig = px.pie(
+                cause_counts,
+                names="Cause",
+                values="Count",
+                title=f"Top {top_n} Causes of Incidents",
+                hole=0.4,  # Donut-style
+                )
+                
+                fig.update_traces(
+                textinfo="percent+label",  # show both
+                textfont_size=14,
+                marker=dict(line=dict(color="#000000", width=1))
+                )
+
+st.plotly_chart(fig, use_container_width=True)

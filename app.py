@@ -96,7 +96,7 @@ elif st.session_state.page == "analyze":
         color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
         fig = go.Figure()
 
-        for i, fy in enumerate(selected_fy):
+        for i, fy in enumerate(selected_years):
             df_fy = grouped[grouped["FY"] == fy]
             # Build label: "FY\nCount"
             text_labels = [f"{fy}\n{int(val)}" if val > 0 else "" for val in df_fy["Total Accidents"]]

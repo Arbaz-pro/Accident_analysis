@@ -72,12 +72,22 @@ elif st.session_state.page == "analyze":
         st.plotly_chart(bar_fig, use_container_width=True)
         
         st.subheader("Month Wise Distribution")
+        month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+        selected_years = fil_df["FY"].unique()
+        selected_months = month_order
+        
+        # Create full combination of FY and Month
+        full_index = pd.MultiIndex.from_product(
+            [selected_months, selected_years],
+            names=["Month", "FY"]
+        )
         grouped = (
         fil_df.groupby(["Month", "FY"])
         .size()
+        .reindex(full_index, fill_value=0)
         .reset_index(name="Total Accidents")
         )
-        month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+        
         # Ensure 'Month' is a categorical type with specified order
         grouped["Month"] = pd.Categorical(grouped["Month"], categories=month_order, ordered=True)
         

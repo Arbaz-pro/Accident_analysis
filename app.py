@@ -142,9 +142,11 @@ elif st.session_state.page == "analyze":
             color_palette = ["#1f77b4", "#4c72b0", "#6baed6", "#9ecae1", "#b2df8a", "#a6cee3", "#fdbf6f", "#c7e9c0", "#fb9a99", "#d9d9d9"]
             fig = go.Figure()
             monthly_totals = grouped.groupby("Month")["Total Accidents"].sum().reindex(month_order)
+            
             for i, fy in enumerate(selected_years):
                 df_fy = grouped[grouped["FY"] == fy]
                 # Build label: "FY\nCount"
+
                 text_labels = [f"{fy} :- ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
                 
                 fig.add_trace(go.Bar(
@@ -156,6 +158,7 @@ elif st.session_state.page == "analyze":
                     marker_color=color_palette[i % len(color_palette)],
                     textfont=dict(size=12, color="white",family="Arial Black"),
                 ))
+            st.write("test",df_fy)
             fig.add_trace(go.Scatter(
             x=monthly_totals.index,
             y=monthly_totals.values,

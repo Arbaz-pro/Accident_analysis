@@ -116,7 +116,6 @@ elif st.session_state.page == "analyze":
             st.plotly_chart(fig, use_container_width=True)
 
         elif(sel_ch=="Month Wise Distribution"):
-            st.write("test","test2") 
             st.subheader("Month Wise Distribution")
             month_order = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
             selected_years = fil_df["FY"].unique()
@@ -158,7 +157,7 @@ elif st.session_state.page == "analyze":
                     marker_color=color_palette[i % len(color_palette)],
                     textfont=dict(size=12, color="white",family="Arial Black"),
                 ))
-            st.write("test",df_fy)
+            
             fig.add_trace(go.Scatter(
             x=monthly_totals.index,
             y=monthly_totals.values,
@@ -178,7 +177,7 @@ elif st.session_state.page == "analyze":
             legend_title="Financial Year"
         )
             st.plotly_chart(fig, use_container_width=True)
-
+            st.write("test",df_fy)
         elif(sel_ch=="Majority Causes"):
             cause_counts = fil_df["Cause / Category"].value_counts().reset_index()
             cause_counts.columns = ["Cause", "Count"]

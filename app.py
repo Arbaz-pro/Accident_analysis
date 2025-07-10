@@ -206,5 +206,5 @@ elif st.session_state.page == "analyze":
 
             st.plotly_chart(fig, use_container_width=True)
         elif(sel_ch=="Injury & Fatality Overview"):
-            group=fil_df.groupby("SO")["Injury Others"].sum()
+            group=fil_df.groupby(["SO","FY"])["Injury Others"].sum()
             st.write("test",group)

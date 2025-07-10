@@ -52,7 +52,7 @@ elif st.session_state.page == "analyze":
     with tab1:
             st.dataframe(fil_df)
     with tab2:
-        sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution","Majority Causes"])
+        sel_ch = st.selectbox("Type of Chart", ["State Wise Distribution", "Month Wise Distribution","Majority Causes","Injury & Fatality Overview"])
         if(sel_ch=="State Wise Distribution"):
             so_order = [
             "DSO", "PSO", "RSO", "UPSO-I", "UPSO-II", "WBSO", "OSO",
@@ -205,3 +205,6 @@ elif st.session_state.page == "analyze":
             width=1400, )
 
             st.plotly_chart(fig, use_container_width=True)
+            elif(sel_ch=="Injury & Fatality Overview"):
+                group=fil_df.groupby("SO")["Injury Others"]
+                st.write("test",group)

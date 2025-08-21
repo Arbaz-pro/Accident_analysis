@@ -177,7 +177,6 @@ elif st.session_state.page == "analyze":
             legend_title="Financial Year"
         )
             st.plotly_chart(fig, use_container_width=True)
-            st.write("test",df_fy)
         elif(sel_ch=="Majority Causes"):
             cause_counts = fil_df["Cause / Category"].value_counts().reset_index()
             cause_counts.columns = ["Cause", "Count"]
@@ -208,3 +207,4 @@ elif st.session_state.page == "analyze":
         elif(sel_ch=="Injury & Fatality Overview"):
             group=fil_df.groupby(["SO","FY"])["Injury Others"].sum().size().reset_index(name='Count')
             st.write("test",group)
+

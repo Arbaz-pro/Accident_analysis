@@ -205,14 +205,8 @@ elif st.session_state.page == "analyze":
 
             st.plotly_chart(fig, use_container_width=True)
         elif(sel_ch=="Injury & Fatality Overview"):
-            grouped_df = df.groupby("")[["Injury Others", "Fatality Others"]].sum().reset_index()
-            fig = px.line(grouped_df, 
-              x="FY", 
-              y=["Injury Others", "Fatality Others"],
-              markers=True,
-              title="Trend of Injuries and Fatalities over Financial Years")
-
-            st.plotly_chart(fig, use_container_width=True)
+            
+            
 
 
 

@@ -146,7 +146,7 @@ elif st.session_state.page == "analyze":
                 df_fy = grouped[grouped["FY"] == fy]
                 # Build label: "FY\nCount"
 
-                text_labels = [f"{fy} :- ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
+                text_labels = [f"{fy} ({int(val)})" if val > 0 else "" for val in df_fy["Total Accidents"]]
                 
                 fig.add_trace(go.Bar(
                     x=df_fy["Month"],
@@ -208,6 +208,7 @@ elif st.session_state.page == "analyze":
             st.write("test",test)
             
             
+
 
 
 

@@ -205,8 +205,10 @@ elif st.session_state.page == "analyze":
 
             st.plotly_chart(fig, use_container_width=True)
         elif(sel_ch=="Injury & Fatality Overview"):
+            st.write("test",test)
             
             
+
 
 
 
